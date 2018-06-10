@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+	<head>
+		<meta charset="utf-8">
+		<meta charset="iso-8859-1">
+		<meta name="author" content="Chi Yu Yeung">
+		<title>Practicum</title>
+	</head>
+	<body>
+		<script>
+		/*players*/
+		/*team one*/
+		var players = [
+			{
+				name: "Piet",
+				score: 0,
+				team: 1
+			},
+			{
+				name: "Bob",
+				score: 0,
+				team: 1
+			},
+			{
+				name: "Tim",
+				score: 0,
+				team: 1
+			},
+			{
+				name: "Karel",
+				score: 0,
+				team: 1
+			},
+
+			/*team two*/
+			{
+				name: "Alan",
+				score: 0,
+				team: 2
+			},
+			{
+				name: "Peter",
+				score: 0,
+				team: 2
+			},
+			{
+				name: "Alex",
+				score: 0,
+				team: 2
+			},
+			{
+				name: "Dylan",
+				score: 0,
+				team: 2
+			},
+		];
+
+		var winners = [
+			{
+				name: "",
+				score: 0
+			},
+			{
+				name: "",
+				score: 0
+			},
+		];
+
+		/*start game*/
+		console.log("Let's begin!");
+		console.log("Please make two teams with in every team four people.");
+		console.log("Here are some rules:");
+		console.log("You will get the opportunity to play twice in each round.");
+		console.log("If you already threw a strike in the first throw, you can't throw one more time. You have to wait till the next round then.");
+		console.log("The bowling game lasts ten rounds, so maybe you will be the lucky one today and win this nice game!");
+		console.log("");
+
+
+		/*rounds*/
+		for (var round = 1; round < 11; round++) {
+			console.log("Round " + round + "!");
+
+			/*player who is up and the scores*/
+			for (var i = 0; i < players.length;  i++) {
+
+				console.log(players[i].name + " from team " + players[i].team + " is up.");
+				var firstThrow = bowl(0);
+				console.log(players[i].name + " threw over " + firstThrow + " on his first throw");
+				var secondThrow = bowl(firstThrow);
+				console.log(players[i].name + " threw over " + secondThrow + " on his second throw");
+				console.log("That makes a total of " + (firstThrow + secondThrow) + " pins knocked over");
+				console.log("");
+			}
+		}
+
+		/*get a random number for each throw*/
+		function bowl(knockedOver){
+			return Math.floor((Math.random() * (1 + (10 - knockedOver))));
+		}
+
+		/*strike*/
+		for (var i = 0; i < players.length; i++) {
+			if (players[i].score == 10) {
+				console.log("WOW! " + players[i].name + " threw a strike! You are on fire!");
+				alert("Perfect game!");
+			}
+		}
+
+		/*the total scores of every player in the game*/
+		console.log("OOOOOOOOOOOOOOHHHH that was the final round. Here are the finalscores:");
+		for (var i = 0; i < players.length; i++) {
+			if(winners[0].score < players[i].score) {
+				var winners = [];
+				winners[0] = players[i];
+			}
+			else if(winners[0].score == players[i].score) {
+				winners.push(players[i]);
+				console.log(players[i].name + " finished the game with a score of " + players[i].score);
+			}
+		}
+		console.log("");
+
+
+		/*the result of the winner or winners of the game*/
+		for (var i = 0; i < players.length;  i++) {
+			if (winners.length == 1){
+			console.log("The winner is " + winners[0].name + " from team " + players[i].team + " with a score of " + winners[0].score);
+			}
+			else {
+			console.log("The winners are " + winners[0].name + " from team " + players[i].team + " with a score of " + winners[0].score + " and " + winners[1].name + " from team " + players[i].team + " with a score of " + winners[1].score);
+			}
+		}
+		</script>
+	</body>
+</html>
